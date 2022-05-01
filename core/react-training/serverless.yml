@@ -1,0 +1,58 @@
+service: react-training
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:*
+      Resource:
+        - arn:aws:dynamodb:us-east-1:261681183087:table/TaskTable
+
+functions:
+  createTask:
+    handler: handler.createTask
+    events:
+      - httpApi:
+          path: /task
+          method: post
+  getTasks:
+    handler: handler.getTasks
+    events:
+      - httpApi:
+          path: /task
+          method: get
+  getTask:
+    handler: handler.getTask
+    events:
+      - httpApi:
+          path: /task/{id}
+          method: get
+  updateTask:
+    handler: handler.updateTask
+    events:
+      - httpApi:
+          path: /task/{id}
+          method: put
+  deleteTask:
+    handler: handler.deleteTask
+    events:
+      - httpApi:
+          path: /task/{id}
+          method: delete
+    
+resources: 
+  Resources:
+    TaskTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: TaskTable
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema: 
+          - AttributeName: id
+            KeyType: HASH
