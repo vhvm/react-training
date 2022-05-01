@@ -135,3 +135,10 @@ module.exports.deleteTask = async (event) => {
     };
 };
 
+
+/* ***************************ENDPOINTS**********************************
+  POST - https://shifuje1m7.execute-api.us-east-1.amazonaws.com/task
+  GET - https://shifuje1m7.execute-api.us-east-1.amazonaws.com/task
+  GET - https://shifuje1m7.execute-api.us-east-1.amazonaws.com/task/{id}
+  PUT - https://shifuje1m7.execute-api.us-east-1.amazonaws.com/task/{id}
+  DELETE - https://shifuje1m7.execute-api.us-east-1.amazonaws.com/task/{id} */
